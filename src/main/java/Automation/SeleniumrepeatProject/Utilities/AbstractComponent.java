@@ -64,6 +64,6 @@ public class AbstractComponent {
 	public void scrolltoEle()
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver; 
-		js.executeScript("window.scrollBy(1090,650)"); 
+		js.executeScript("window.scrollBy(1440,900)"); 
 	}
 }
