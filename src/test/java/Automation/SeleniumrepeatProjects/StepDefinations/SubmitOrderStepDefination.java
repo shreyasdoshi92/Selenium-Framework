@@ -8,6 +8,7 @@ import Automation.SeleniumrepeatProject.PageObjects.CartPage;
 import Automation.SeleniumrepeatProject.PageObjects.CheckOutPage;
 import Automation.SeleniumrepeatProject.PageObjects.ConfrmationPage;
 import Automation.SeleniumrepeatProject.PageObjects.LandingPage;
+import Automation.SeleniumrepeatProject.PageObjects.OrderPage;
 import Automation.SeleniumrepeatProject.PageObjects.ProductCatalogue;
 import Automation.SeleniumrepeatProjects.TestComponents.BaseTest;
 import io.cucumber.java.en.Given;
@@ -21,6 +22,7 @@ public class SubmitOrderStepDefination extends BaseTest {
 	public CartPage cartpage;
 	public CheckOutPage checkOutPage;
 	public ConfrmationPage confirmationPage;
+	public OrderPage orderpage;
 	
 	@Given("I landed on the ecommerce page")
 	public void i_landed_on_the_ecommerce_page() throws IOException {
@@ -64,6 +66,18 @@ public class SubmitOrderStepDefination extends BaseTest {
 		Assert.assertEquals(msg, landingPage.errorMsg());
 		driver.close();
 	
+	}
+	
+	@When("Go to orders page clicking on Orders")
+	public void Go_to_orders_page_clicking_on_Orders() {
+		orderpage =productcatalogue.goToOrderPage();
+	   
+	}
+	
+	@Then("^(.+) is displayed on order page$")
+	public void Product_is_displayed_on_order_page(String ProductName)
+	{
+		Assert.assertTrue(orderpage.verifyProductDispaly(ProductName));
 	}
 
 }

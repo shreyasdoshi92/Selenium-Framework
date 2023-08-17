@@ -16,3 +16,15 @@ Examples:
 |shreyasdoshi48@gmail.com	|Mkyasv@1234	|ZARA COAT 3		|india			|
 |sswarali05@gmail.com		|Ssd@12345		|ADIDAS ORIGINAL	|aus			|
 
+
+
+Scenario Outline: Positive Test of order display
+Given Logged in with username <username> and password <password>
+When Go to orders page clicking on Orders
+Then <ProductName> is displayed on order page
+
+Examples:
+|username					|password		|ProductName		|
+|shreyasdoshi48@gmail.com	|Mkyasv@1234	|ZARA COAT 3		|
+|sswarali05@gmail.com		|Ssd@12345		|ADIDAS ORIGINAL	|
+
