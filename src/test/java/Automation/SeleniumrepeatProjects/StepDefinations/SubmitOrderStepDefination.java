@@ -19,6 +19,7 @@ public class SubmitOrderStepDefination extends BaseTest {
 	public LandingPage landingPage;
 	public ProductCatalogue productcatalogue;
 	public CartPage cartpage;
+	public CheckOutPage checkOutPage;
 	public ConfrmationPage confirmationPage;
 	
 	@Given("I landed on the ecommerce page")
@@ -33,18 +34,18 @@ public class SubmitOrderStepDefination extends BaseTest {
 	}
 
 	@When("^I add the product (.+) to the cart$")
-	public void i_add_the_product_to_the_cart(String ProductName) {
-		productcatalogue.addProductToCart(ProductName);
+	public void i_add_the_product_to_the_cart(String Product) {
+		productcatalogue.addProductToCart(Product);
 	   
 	}
 
 	@When("^checkout (.+) and select the country (.+) and submit the order$")
-	public void checkout_productname_and_select_the_country_and_submit_the_order(String ProductName, String country) throws InterruptedException {
+	public void checkout_productname_and_select_the_country_and_submit_the_order(String Product, String country) throws InterruptedException {
 		cartpage = productcatalogue.goToCartPage();
-		Boolean match = cartpage.verifyProductDispaly(ProductName);
+		Boolean match = cartpage.verifyProductDispaly(Product);
 		Assert.assertTrue(match);
 
-		CheckOutPage checkOutPage = cartpage.goToCheckout();
+		checkOutPage = cartpage.goToCheckout();
 		checkOutPage.selectCountry(country);
 
 		confirmationPage = checkOutPage.submitOrder();
@@ -54,6 +55,14 @@ public class SubmitOrderStepDefination extends BaseTest {
 	public void message_is_displayed_on_confirmation_page(String msg) {
 		String FinalSuccessMsg = confirmationPage.confirmationMsg();
 		Assert.assertTrue(FinalSuccessMsg.equalsIgnoreCase(msg));
+		driver.close();
+	
+	}
+	
+	@Then("{string} message is displayed")
+	public void message_is_displayed_login_page(String msg) {
+		Assert.assertEquals(msg, landingPage.errorMsg());
+		driver.close();
 	
 	}
 
