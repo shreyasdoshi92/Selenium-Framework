@@ -71,7 +71,7 @@ public class SubmitOrderStepDefination extends BaseTest {
 	@When("Go to orders page clicking on Orders")
 	public void Go_to_orders_page_clicking_on_Orders() {
 		orderpage =productcatalogue.goToOrderPage();
-	   
+	    System.out.println(" yes");
 	}
 	
 	@Then("^(.+) is displayed on order page$")
