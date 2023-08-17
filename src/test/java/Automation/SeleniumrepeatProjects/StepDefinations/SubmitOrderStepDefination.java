@@ -78,6 +78,16 @@ public class SubmitOrderStepDefination extends BaseTest {
 	public void Product_is_displayed_on_order_page(String ProductName)
 	{
 		Assert.assertTrue(orderpage.verifyProductDispaly(ProductName));
+		driver.close();
+	}
+	
+	@Then("^(.+) is displayed on cart page$")
+	public void Product_is_displayed_on_cart_page(String ProductName)
+	{
+		cartpage = productcatalogue.goToCartPage();
+		Boolean match = cartpage.verifyProductDispaly(ProductName);
+		Assert.assertTrue(match);
+		driver.close();
 	}
 
 }

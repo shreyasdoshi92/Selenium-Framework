@@ -37,12 +37,12 @@ public class SubmitOrderTest extends BaseTest {
 		Assert.assertTrue(FinalSuccessMsg.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 	}
 	
-	@Test(dependsOnMethods = {"submitOrder"})
-	public void OderDisplay()
+	@Test(dataProvider = "getData1", dependsOnMethods = {"submitOrder"})
+	public void OderDisplay(HashMap<String,String> input1)
 	{
-		ProductCatalogue productcatalogue = landingPage.loginApplication("shreyasdoshi48@gmail.com", "Mkyasv@1234");
+		ProductCatalogue productcatalogue = landingPage.loginApplication(input1.get("username"), input1.get("password"));
 		OrderPage orderpage =productcatalogue.goToOrderPage();
-		Assert.assertTrue(orderpage.verifyProductDispaly(ProductName));
+		Assert.assertTrue(orderpage.verifyProductDispaly(input1.get("ProductName")));
 	}
 	
 	
@@ -56,6 +56,16 @@ public class SubmitOrderTest extends BaseTest {
 		return new Object[][] { {data.get(0)}, 
 								{data.get(1)} };
 	}
+	
+	@DataProvider
+	public Object[][] getData1() throws IOException {
+		//json file to hapshmap
+		List<HashMap<String,String>> data = getJsonData(System.getProperty("user.dir")+"\\src\\test\\java\\Automation\\SeleniumrepeatProjects\\Data\\VerifyProducts.json");
+		
+		return new Object[][] { {data.get(0)}, 
+								{data.get(1)} };
+	}
+	
 	
 //	@DataProvider
 //	public Object[][] getData() {
